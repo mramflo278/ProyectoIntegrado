@@ -125,6 +125,8 @@ header("Location: teachers.php?nuevo=true");
             <label>telefono: </label> <input type="tel" name="telefono"  class="form-control">
             <input type="submit" name="Guardar" class="btn btn-success">
         </form>
+        <?php include('footer.php') ?>
+
     </div>
     </body>
 </html>

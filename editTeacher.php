@@ -139,6 +139,8 @@ header("Location: teachers.php?editado=true");
 
             <input type="submit" name="Editar"  class="btn btn-warning">
         </form>
+        <?php include('footer.php') ?>
+
     </div>
     </body>
 </html>

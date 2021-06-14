@@ -162,6 +162,8 @@ $values = $response->getValues();
 
             </tbody>
         </table>
+        <?php include('footer.php') ?>
+
     </div>
 </body>
 
