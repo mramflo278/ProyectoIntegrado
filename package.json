@@ -1,0 +1,23 @@
+{
+  "name": "proyectointegrado",
+  "version": "1.0.0",
+  "description": "proyecto organigrama",
+  "main": "index.php",
+  "dependencies": {
+    "sweetalert2": "^11.0.17"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mramflo278/ProyectoIntegrado.git"
+  },
+  "author": "Miguel Ángel Ramírez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mramflo278/ProyectoIntegrado/issues"
+  },
+  "homepage": "https://github.com/mramflo278/ProyectoIntegrado#readme"
+}

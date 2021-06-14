@@ -1,0 +1,65 @@
+/**
+clase del div primcipal de departamento 
+**/
+.departamento{
+    background-color: #d1d1f0;
+    border-radius: 10px;
+    transition: all 0.5s;
+    opacity: 0;
+    text-align: center;
+    padding: 10px;
+    width: 75%;
+    min-height: 850px;
+    margin: 10px auto;
+    color: rgb(12, 11, 11);
+}
+.imagenProfesor{
+    width: 100px; height: 150px; border-radius: 10px;
+}
+/**
+animacion div departamento
+**/
+.mostrarArriba{
+    animation: mostrarArriba 1S;
+}
+@keyframes mostrarArriba {
+    0%   {  transform: translateY(-60px);}
+    100% {  transform: translateY(0px);}
+}
+/**
+clase del elementos de la lista dentro del div de profesores
+**/
+.list-group-item {
+    background-color: #d1d1f0;
+    color: rgb(12, 11, 11);
+
+}
+.contenedor{
+position: relative;
+display: inline-block;
+text-align: center;
+}
+a {
+    text-decoration: none;
+}
+.centrado{
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+}
+
+/**
+clase del div que aparece cuando se despliega el modal de profesores
+**/
+.divTeacher {
+    text-align: center;
+    background-color: #ffe28c;
+    color: #b25825;
+    padding: 20px 20px 10px 20px;
+    margin: 10px auto;
+    border-radius: 10px;
+    min-width: 150px;
+    min-height: 400px;
+    word-wrap: break-word;
+}
