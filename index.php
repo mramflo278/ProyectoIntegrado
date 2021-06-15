@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/modelo/Departament.php';
-require_once __DIR__ . '/modelo/Profesor.php';
+require_once __DIR__ . '/modelo/profesor.php';
 require_once __DIR__ . '/controller/DepartementController.php';
 require_once __DIR__ . '/controller/TeacherController.php';
 session_start();
