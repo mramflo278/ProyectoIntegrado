@@ -148,7 +148,7 @@ $values = $response->getValues();
                                 <tr>
                                     <td><?php echo $value[1] ?></td>
                                     <td><?php echo $value[2] ?></td>
-                                    <td><?php echo $value[3] ?></td>
+                                    <td><img src="<?php echo getSRCImageFromTeacher($value[3])?>" style="width: 50px; height: 50px; border-radius: 50%;" alt=""></td>
                                     <td><?php echo $value[4] ?></td>
                                     <td><?php echo $value[5] ?></td>
                                     <td><?php echo $value[6] ?></td>
