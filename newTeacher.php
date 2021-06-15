@@ -90,7 +90,7 @@ $params = [
 $result = $service->spreadsheets_values->append(
     $spreadsheetId,$range,$body,$params,$insert
 );
-header("Location: teachers.php?nuevo=true");
+header("Location: adminTeachers.php?nuevo=true");
 }
 ?>
 <html>
@@ -110,23 +110,45 @@ header("Location: teachers.php?nuevo=true");
                 <h2>Crear Profesor</h2>
             </div>
         </div>
-        <form action="" method="post" class="form-group" enctype='multipart/form-data'>
-            <label>Nombre: </label> <input type="text" name="nombre" class="form-control">
-            <label>Apellidos: </label> <input type="text" name="apellidos" class="form-control">
-            <label>Foto: </label> <input type="file" name="foto" class="form-control">
-            <label>Departamentos: </label>
-            <select name="departamentos"class="form-select">
+        <form action="" method="post" class="form-group needs-validation " enctype='multipart/form-data'>
+            <label for="nombre">Nombre: </label> <input type="text" id="nombre" name="nombre" class="form-control" required>
+            <label for="apellidos" >Apellidos: </label> <input type="text" id="apellidos" name="apellidos" class="form-control" required>
+            <label for="foto">Foto: </label> <input type="file" name="foto" id="foto" class="form-control">
+            <label for="departamentos">Departamentos: </label>
+            <select name="departamentos"class="form-select" >
                <?php foreach ($departamentos as $value) { ?>
                 <option value="<?php echo $value[0] ?>"><?php echo $value[0] ?></option>
                <?php } ?>
             </select>
-            <label>Cargo: </label> <input type="text" name="cargo"  class="form-control">
-            <label>email: </label> <input type="email" name="mail"  class="form-control">
-            <label>telefono: </label> <input type="tel" name="telefono"  class="form-control">
-            <input type="submit" name="Guardar" class="btn btn-success">
+            <label for="cargo">Cargo: </label> <input type="text" name="cargo" id="cargo" class="form-control">
+            <label for="email" >email: </label> <input type="email" name="mail" id="email"  class="form-control" required>
+            <label for="telefono">telefono: </label> <input type="tel" name="telefono"   id="telefono" class="form-control" required>
+            <input type="submit" name="Guardar" value="enviar" class="btn btn-success">
         </form>
         <?php include('footer.php') ?>
 
     </div>
     </body>
+    <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+    </script>
 </html>

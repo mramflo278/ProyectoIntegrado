@@ -33,7 +33,7 @@ $departamentos =  $responseDepartament->getValues();
 if(!isset($_GET['id'])){
 header('Location: teachers.php');
 }else{
-$range = 'Profesores!A'.$_GET['id'].':E'.$_GET['id'];
+$range = 'Profesores!A'.$_GET['id'].':H'.$_GET['id'];
 $response = $service->spreadsheets_values->get($spreadsheetId, $range);
 //recoger los valores de la respuesta en una variable
 $values = $response->getValues();
@@ -80,7 +80,7 @@ if (is_uploaded_file($_FILES['foto']['tmp_name'])){
 }else{
     $foto= $values[0][3];
 }
-$range='Profesores!A'.$_GET['id'].':E'.$_GET['id'];
+$range='Profesores!A'.$_GET['id'].':H'.$_GET['id'];
 $values = [
     [date(time()),
     $_POST['nombre'],
@@ -102,12 +102,13 @@ $params = [
 $result = $service->spreadsheets_values->update(
     $spreadsheetId,$range,$body,$params
 );
-header("Location: teachers.php?editado=true");
+header("Location: adminTeachers.php?editado=true");
 }
 ?>
-<html>
+<html lang="es">
     <head>
         <title>Editar Profesor</title>
+        
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
@@ -123,24 +124,46 @@ header("Location: teachers.php?editado=true");
                 <h2>Editar Profesor</h2>
             </div>
         </div>
-        <form action="" method="post" class="form-group" enctype='multipart/form-data'>
-            <label>Nombre: </label> <input type="text" name="nombre" value="<?php echo $values[0][1] ?>" class="form-control">
-            <label>Apellidos: </label> <input type="text" name="apellidos" value="<?php echo $values[0][2] ?>" class="form-control">
-            <label>Foto: </label> <input type="file" name="foto" class="form-control">
-            <label>Departamentos: </label>
-            <select name="departamentos"class="form-select">
+        <form action="" method="post" class="form-group needs-validation" enctype='multipart/form-data'>
+            <label for="nombre">Nombre: </label> <input type="text" id="nombre" name="nombre" value="<?php echo $values[0][1] ?>" class="form-control">
+            <label for="apellidos">Apellidos: </label> <input type="text" id="apellidos" name="apellidos" value="<?php echo $values[0][2] ?>" class="form-control">
+            <label for="foto">Foto: </label> <input type="file" name="foto" id="foto" class="form-control">
+            <label for="departamento">Departamentos: </label>
+            <select name="departamentos" id="departamentos" class="form-select">
                <?php foreach ($departamentos as $value) { ?>
                 <option value="<?php echo $value[0] ?>" <?php if( $values[0][4] == $value[0]) echo 'selected' ?>><?php echo $value[0] ?></option>
                <?php } ?>
             </select>
-            <label>Cargo: </label> <input type="text" name="cargo" value="<?php echo $values[0][5] ?>" class="form-control">
-            <label>email: </label> <input type="email" name="mail" value="<?php echo $values[0][6] ?>" class="form-control">
-            <label>telefono: </label> <input type="tel" name="telefono" value="<?php echo $values[0][7] ?>" class="form-control">
+            <label for="cargo">Cargo: </label> <input type="text" name="cargo" id="cargo" value="<?php echo $values[0][5] ?>" class="form-control">
+            <label for="email">email: </label> <input type="email" name="mail" id="email" value="<?php echo $values[0][6] ?>" class="form-control">
+            <label for="telefono">telefono: </label> <input type="tel" name="telefono" id="telefono" value="<?php echo $values[0][7] ?>" class="form-control">
 
-            <input type="submit" name="Editar"  class="btn btn-warning">
+            <input type="submit" name="Editar" value="enviar" class="btn btn-warning">
         </form>
         <?php include('footer.php') ?>
 
     </div>
     </body>
+    <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+    </script>
 </html>

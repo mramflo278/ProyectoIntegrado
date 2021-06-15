@@ -1,7 +1,7 @@
 <nav class="navbar navbar-dark bg-dark navbar-expand-lg navbar-light bg-light">
             <div class="container">
 
-                <a class="navbar-brand" href="#"><img src="resources/img/cropped-logo_header3.png" alt="" style="width: 100px; height: 40px;"></a>
+                <a class="navbar-brand" href="#"><img src="resources/img/cropped-logo_header3.png" alt="logo instituto" style="width: 100px; height: 40px;"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>

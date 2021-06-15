@@ -9,7 +9,7 @@
 
 class Profesor {
     private $nombre;
-    private $s;
+    private $apellidos;
     private $mail;
     private $telefono;
     private $cargo;
@@ -38,7 +38,7 @@ class Profesor {
     function newProfesor($nombre="",$apellido="",$mail="",$telefono="",$cargo="",$departamento=null,$imagen="")
     {
         $this->nombre=$nombre;
-        $this->apellido=$apellido;
+        $this->apellidos=$apellido;
         $this->mail=$mail;
         $this->telefono=$telefono;
         $this->cargo=$cargo;

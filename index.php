@@ -38,7 +38,7 @@ $arrayDepartamentos = DepartamentController::getAll($service);
 
 ?>
 
-<html>
+<html lang="es">
 
 <head>
     <title>Maestros</title>
@@ -72,21 +72,23 @@ $arrayDepartamentos = DepartamentController::getAll($service);
                                         <?php if ($imagen != false && $IMAGEN) { ?>
                                             <img src="<?php echo $imagen  ?>"  class="imagenProfesor" alt="">
                                         <?php } ?>
-                                        <p><?php if ($NOMBRE) {
+                                        <p>
+                                        <strong><?php if ($NOMBRE) {
                                                 echo $profesor->nombre . ' ';
                                             }
                                             if ($APELLIDOS) {
                                                 echo $profesor->apellidos;
-                                            } ?></p>
+                                            } ?></strong>
+                                            </p>
                                         <p><?php if ($MAIL) {
                                                 echo $profesor->mail;
                                             } ?></p>
                                         <p><?php if ($TELEFONO) {
                                                 echo $profesor->telefono;
                                             } ?></p>
-                                        <p><?php if ($CARGO) {
+                                        <strong style="text-decoration: underline;"><?php if ($CARGO) {
                                                 echo $profesor->cargo;
-                                            } ?></p>
+                                            } ?></strong>
                                     </div>
                                 </div>
                             </div>
@@ -162,21 +164,21 @@ $arrayDepartamentos = DepartamentController::getAll($service);
                                                         <?php if ($imagen != false && $IMAGEN) { ?>
                                                             <img src="<?php echo $imagen  ?>" class="imagenProfesor" alt="">
                                                         <?php } ?>
-                                                        <p><?php if ($NOMBRE) {
+                                                        <p>  <strong><?php if ($NOMBRE) {
                                                                 echo $profesor->nombre . ' ';
                                                             }
                                                             if ($APELLIDOS) {
                                                                 echo $profesor->apellidos;
-                                                            } ?></p>
+                                                            } ?>  </strong></p>
                                                         <p><?php if ($MAIL) {
                                                                 echo $profesor->mail;
                                                             } ?></p>
                                                         <p><?php if ($TELEFONO) {
                                                                 echo $profesor->telefono;
                                                             } ?></p>
-                                                        <p><?php if ($CARGO) {
+                                                        <p>  <strong style="text-decoration: underline;"><?php if ($CARGO) {
                                                                 echo $profesor->cargo;
-                                                            } ?></p>
+                                                            } ?>  </strong></p>
                                                     </div>
                                                 </div>
                                             </div>

@@ -1,9 +1,9 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
-require_once __DIR__.'/modelo/Departament.php';
-require_once __DIR__.'/modelo/profesor.php';
-require_once __DIR__.'/controller/DepartementController.php';
-require_once __DIR__.'/controller/TeacherController.php';
+require_once __DIR__ . '/modelo/Departament.php';
+require_once __DIR__ . '/modelo/profesor.php';
+require_once __DIR__ . '/controller/DepartementController.php';
+require_once __DIR__ . '/controller/TeacherController.php';
 
 include './funciones/Funciones.php';
 session_start();
@@ -42,7 +42,7 @@ $service = new Google_Service_Sheets($client);
 //ide de la hoja de calculo de google 
 $spreadsheetId = '1PoW9yNjqTkjDBwTZWmQ0RzZocuZ5Z6dftO0FFvFupsM';
 // rango de columnas que se selecionaran
-$range = 'profesores!A1:E';
+$range = 'profesores!A1:H';
 
 if (isset($_POST['delete'])) {
     $borrado =  TeacherController::deleteTeacher($service);
@@ -51,9 +51,6 @@ if (isset($_POST['edit'])) {
     $id = $_POST['rowToEdit'] + 1;
     header('Location: editTeacher.php?id=' . $id);
 }
-
-
-
 
 //peticion a la api de google
 $response = $service->spreadsheets_values->get($spreadsheetId, $range);
@@ -66,10 +63,10 @@ $values = $response->getValues();
 
 ?>
 
-<html>
+<html lang="es">
 
 <head>
-    <title>maestros</title>
+    <title>Maestros</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
@@ -105,6 +102,7 @@ $values = $response->getValues();
         }
     </script>
 
+
 </head>
 
 <body>
@@ -120,48 +118,58 @@ $values = $response->getValues();
     }
     ?>
 
-    <div class="container">
+    <div class="container-flex">
         <?php include('header.php') ?>
         <div class="row">
             <div class="col ">
                 <a href="newTeacher.php" class="btn btn-primary">Crear nuevo Profesor</a>
             </div>
         </div>
-        <table class="table table-dark table-hover text-center">
-            <thead>
-                <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellidos</th>
-                    <th scope="col">Foto</th>
-                    <th scope="col">Departamentos</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($values as $key => $value) { ?>
-                    <?php if ($key != 0) { ?>
+        <div class="row">
+            <div class="col">
+                <table class="table table-dark table-hover text-center order-table">
+                    <thead>
                         <tr>
-                            <td><?php echo $value[1] ?></td>
-                            <td><?php echo $value[2] ?></td>
-                            <td><?php echo $value[3] ?></td>
-                            <td><?php echo $value[4] ?></td>
-                            <td>
-                                <form action="" method="post"> <input type="hidden" name="rowToDelete" value="<?php echo $key ?>"> <input type="submit" name="delete" value="Borrar" class="btn btn-danger"></form>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellidos</th>
+                            <th scope="col">Foto</th>
+                            <th scope="col">Departamentos</th>
+                            <th scope="col">Cargo</th>
+                            <th scope="col">Mail</th>
+                            <th scope="col">Telefono</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
 
-                            </td>
-                            <td>
-                                <form action="" method="post"> <input type="hidden" name="rowToEdit" value="<?php echo $key ?>"> <input type="submit" name="edit" value="editar" class="btn btn-warning"></form>
-
-                            </td>
                         </tr>
-                <?php    }
-                }
-                ?>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($values as $key => $value) { ?>
+                            <?php if ($key != 0) { ?>
+                                <tr>
+                                    <td><?php echo $value[1] ?></td>
+                                    <td><?php echo $value[2] ?></td>
+                                    <td><?php echo $value[3] ?></td>
+                                    <td><?php echo $value[4] ?></td>
+                                    <td><?php echo $value[5] ?></td>
+                                    <td><?php echo $value[6] ?></td>
+                                    <td><?php echo $value[7] ?></td>
+                                    <td>
+                                        <form action="" method="post"> <input type="hidden" name="rowToDelete" value="<?php echo $key ?>"> <input type="submit" name="delete" value="Borrar" class="btn btn-danger"></form>
 
-            </tbody>
-        </table>
+                                    </td>
+                                    <td>
+                                        <form action="" method="post"> <input type="hidden" name="rowToEdit" value="<?php echo $key ?>"> <input type="submit" name="edit" value="editar" class="btn btn-warning"></form>
+
+                                    </td>
+                                </tr>
+                        <?php    }
+                        }
+                        ?>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <?php include('footer.php') ?>
 
     </div>

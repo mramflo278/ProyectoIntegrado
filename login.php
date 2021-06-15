@@ -1,43 +1,42 @@
-<?php 
+<?php
 require __DIR__ . '/vendor/autoload.php';
 include './funciones/Funciones.php';
 session_start();
-if(isset($_SESSION['usuario'])){
+if (isset($_SESSION['usuario'])) {
     echo
     header('Location:adminTeacher.php');
 }
-$error=false;
+$error = false;
 if (isset($_POST['enviar'])) {
 
-$client = new Google_Client();
-$client->setApplicationName('Google Sheets API PHP Quickstart');
-$client->setScopes([\Google_Service_Sheets::SPREADSHEETS]);
-$client->setAuthConfig(__DIR__ . '/credenciales.json');
-$client->setAccessType('offline');
-$client->setPrompt("select_account consent");
+    $client = new Google_Client();
+    $client->setApplicationName('Google Sheets API PHP Quickstart');
+    $client->setScopes([\Google_Service_Sheets::SPREADSHEETS]);
+    $client->setAuthConfig(__DIR__ . '/credenciales.json');
+    $client->setAccessType('offline');
+    $client->setPrompt("select_account consent");
 
 
-$service = new Google_Service_Sheets($client);
+    $service = new Google_Service_Sheets($client);
 
-// recoger los datos de la hoja de calculo  tanto de los profesores como de los departamentos:
-// https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
-//ide de la hoja de calculo de google 
-$spreadsheetId = '1PoW9yNjqTkjDBwTZWmQ0RzZocuZ5Z6dftO0FFvFupsM';
-// rango de columnas que se selecionaran
-$range = 'USUARIOS!A:B';
-//peticion a la api de google
-$response = $service->spreadsheets_values->get($spreadsheetId, $range);
-//recoger los valores de lar espuesta en una variable
-$values = $response->getValues();
+    // recoger los datos de la hoja de calculo  tanto de los profesores como de los departamentos:
+    // https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
+    //ide de la hoja de calculo de google 
+    $spreadsheetId = '1PoW9yNjqTkjDBwTZWmQ0RzZocuZ5Z6dftO0FFvFupsM';
+    // rango de columnas que se selecionaran
+    $range = 'USUARIOS!A:B';
+    //peticion a la api de google
+    $response = $service->spreadsheets_values->get($spreadsheetId, $range);
+    //recoger los valores de lar espuesta en una variable
+    $values = $response->getValues();
 
-$result=login($_POST['password'],$_POST['usuario'],$values);
-if($result){
-    $_SESSION['usuario']=$_POST['usuario'];
-    header('Location:adminTeacher.php');
-}else{
-    $error=true;
-}
-
+    $result = login($_POST['password'], $_POST['usuario'], $values);
+    if ($result) {
+        $_SESSION['usuario'] = $_POST['usuario'];
+        header('Location:adminTeacher.php');
+    } else {
+        $error = true;
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -52,12 +51,12 @@ if($result){
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>login</title>
     <style>
-        body{
+        body {
             background-color: grey;
         }
     </style>
     <script>
-     function showModalError() {
+        function showModalError() {
             Swal.fire({
                 icon: 'error',
                 title: 'Usuario o contraseña imcorrectos',
@@ -70,27 +69,55 @@ if($result){
 
 <body>
     <div class="container">
-        <?php if($error) echo '<script>showModalError();</script>' ?>
+        <?php if ($error) echo '<script>showModalError();</script>' ?>
         <div class="row">
             <div class="col m-auto text-center">
                 <img src="resources/img/login.png" alt="">
-                <form action="" method="POST" >
-            <div class="row mb-3">
-                <div class="col-sm-12 ">
-                    <input type="text" class="form-control" name="usuario" placeholder="Escriba aqui su nombre de usuario" id="inputEmail3">
-                </div>
-            </div>
-            <div class="row mb-3 ">
-                <div class="col-sm-12">
-                    <input type="password"  name="password" placeholder="Escriba aqui su contraseña" class="form-control" id="inputPassword3">
-                </div>
-            </div>
+                <form action="" method="POST" class="needs-validation" novalidate>
+                    <div class="row mb-3">
+                        <div class="col-sm-12 ">
+                            <input type="text" class="form-control" required name="usuario" placeholder="Escriba aqui su nombre de usuario" id="inputEmail3">
+                            <div class="invalid-feedback">
+                                Este campo es requerido.Por favor rellene el campo
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3 ">
+                        <div class="col-sm-12">
+                            <input type="password" name="password" required placeholder="Escriba aqui su contraseña" class="form-control" id="inputPassword3">
+                            <div class="invalid-feedback">
+                                Este campo es requerido.Por favor rellene el campo
+                            </div>
+                        </div>
+                    </div>
 
-            <button type="submit" class="btn btn-primary" name="enviar">Iniciar sesion</button>
-        </form></div>
+                    <button type="submit" class="btn btn-primary" name="enviar">Iniciar sesion</button>
+                </form>
+            </div>
         </div>
-        
+
     </div>
 </body>
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
 
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+</script>
 </html>
